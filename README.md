@@ -183,6 +183,19 @@ public class MainActivity extends AppCompatActivity {
 
 ``` 
 
+此项目使用的依赖有
+``` 
+ compile 'com.android.support:design:23.0.1'
+ compile 'com.android.support:appcompat-v7:23.0.1'
+ //   facebook图片加载库
+ compile 'com.facebook.fresco:fresco:0.8.1'
+ //  viewpager指示器
+ compile 'me.relex:circleindicator:1.1.5@aar'
+ compile 'com.pnikosis:materialish-progress:1.7'
+ compile 'com.canyinghao:can-adapter:1.0.1'
+
+``` 
+
 
 
 
