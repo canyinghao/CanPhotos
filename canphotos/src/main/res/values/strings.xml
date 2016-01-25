@@ -1,0 +1,13 @@
+<resources>
+
+
+    <string name="photo_name">相册</string>
+
+
+    <string name="photo_max">选择图片不能超过%1$s张</string>
+    <string name="sure">确定</string>
+    <string name="down_load">下载</string>
+
+    <string name="save_success">保存图片成功</string>
+    <string name="save_fail">保存图片失败</string>
+</resources>

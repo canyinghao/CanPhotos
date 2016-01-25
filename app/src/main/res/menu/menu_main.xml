@@ -1,0 +1,41 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+    <item
+        android:id="@+id/action_1"
+        android:orderInCategory="100"
+        android:title="设置背景为黑色"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_2"
+        android:orderInCategory="100"
+        android:title="设置背景为白色"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_3"
+        android:orderInCategory="100"
+        android:title="设置每行个数为1"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_4"
+        android:orderInCategory="100"
+        android:title="设置每行个数为2"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_5"
+        android:orderInCategory="100"
+        android:title="设置每行个数为3"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_6"
+        android:orderInCategory="100"
+        android:title="显示隐藏主页预览图下载按钮"
+        app:showAsAction="never" />
+</menu>
