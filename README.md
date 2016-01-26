@@ -15,7 +15,7 @@ CanPhotos是一个图片多选控件，图片加载框架只能使用fresco，�
 
 进入多选界面方法：CanPhotoHelper.getInstance().gotoPhotoSelect(context, null, 5)，第一个参数当前Activity ；第二个参数一个ArrayList<String>，将已选的图片传进入，在选择相同图片时就会标识已选，避免重复选择；第三个参数时选择的最大张数。
 
-进入预览界面方法：CanPhotoHelper.getInstance().gotoPreview(context, arrayList, position, saveFile)；第一个参数当前Activity；第二个参数一个ArrayList<String>，预览的所有图片；第三个参数，当前显示得图片；第四个参数是一个文件夹的File，为null是将不会有下载按钮，不为null时，将显示下载按钮，点击按钮后将下载到对应的文件夹里。
+进入预览界面方法：CanPhotoHelper.getInstance().gotoPreview(context, arrayList, position, saveFile)；第一个参数当前Activity；第二个参数一个ArrayList<String>，预览的所有图片；第三个参数，点击的图片的position；第四个参数是一个文件夹的File，为null时将不会有下载按钮，不为null时，将显示下载按钮，点击按钮后将下载到对应的文件夹里。
 
 其它方法有设置背景色，一行显示几项等。Toolbar、FloatingActionButton的颜色自行在style里配置Theme时配置。注意，使用fresco需要在使用之前先执行Fresco.initialize(this)，最好写在Application里。
 ```JAVA
