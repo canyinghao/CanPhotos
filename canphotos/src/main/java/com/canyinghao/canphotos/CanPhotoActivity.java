@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,7 +40,7 @@ public class CanPhotoActivity extends AppCompatActivity {
 
     private AppCompatActivity context;
 
-    private int H;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class CanPhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_album);
         context = this;
 
-        H = CanPhotoHelper.getInstance().getScreenDisplayMetrics(context).widthPixels / CanPhotoHelper.getInstance().getSpanCount();
+
 
 
         findViewById(R.id.main).setBackgroundColor(CanPhotoHelper.getInstance().getBackGroundColor());
@@ -67,7 +66,7 @@ public class CanPhotoActivity extends AppCompatActivity {
 
         adapter = new AlbumAdapter(recyclerView);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, CanPhotoHelper.getInstance().getSpanCount(), GridLayoutManager.VERTICAL, false));
+        CanPhotoHelper.getInstance().setRecyclerViewLayoutManager(context,recyclerView);
         recyclerView.setAdapter(adapter);
 
         adapter.setList(CanPhotoHelper.getInstance().getPhotoAlbum(this));
@@ -193,9 +192,8 @@ public class CanPhotoActivity extends AppCompatActivity {
 
             SimpleDraweeView image = helper.getView(R.id.image);
 
-            ViewGroup.LayoutParams params = image.getLayoutParams();
-            params.height = H;
-            image.setLayoutParams(params);
+
+            CanPhotoHelper.getInstance().setImageHeight(context,image,position);
 
 
             CanPhotoHelper.getInstance().setDraweeImage(image, "file://" + url, 0, 0);

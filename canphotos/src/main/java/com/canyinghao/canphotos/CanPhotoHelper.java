@@ -10,11 +10,16 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
@@ -42,22 +47,22 @@ public class CanPhotoHelper {
     public static final String PHOTO_MAX = "PHOTO_MAX";
 
 
-
     public static final String PHOTO_POSITION = "PHOTO_POSITION";
     public static final String PHOTO_TITLE = "PHOTO_TITLE";
 
 
     private static CanPhotoHelper helper;
-// 背景颜色
+    // 背景颜色
     private int bgColor = Color.parseColor("#333333");
 
-//    每行显示数量
-    private int spanCount= 3;
+    //    每行显示数量
+    private int spanCount = 3;
 
+    // 图片高度
+    private int H;
 
 
     private CanPhotoHelper() {
-
 
 
     }
@@ -90,7 +95,14 @@ public class CanPhotoHelper {
     }
 
     public void setSpanCount(int spanCount) {
-        this.spanCount = spanCount;
+        if (spanCount > 0) {
+            this.spanCount = spanCount;
+
+        }
+
+        H = 0;
+
+
     }
 
     /**
@@ -112,14 +124,13 @@ public class CanPhotoHelper {
     }
 
 
-
-    public ArrayList<String> getLocalPreviewList(List<String>  list){
+    public ArrayList<String> getLocalPreviewList(List<String> list) {
         ArrayList<String> arrayList = new ArrayList<String>();
         for (int i = 0; i < list.size(); i++) {
 
             String str = list.get(i);
-            if (!TextUtils.isEmpty(str)&&!str.contains("://")){
-                str = "file://" +str;
+            if (!TextUtils.isEmpty(str) && !str.contains("://")) {
+                str = "file://" + str;
             }
             arrayList.add(str);
         }
@@ -149,6 +160,76 @@ public class CanPhotoHelper {
         }
         intent.putExtra(CanViewPagerActivity.FILE_SAVE, savePath);
         context.startActivity(intent);
+    }
+
+
+    /**
+     * 设置图片高度
+     *
+     * @param context
+     * @param image
+     * @param position
+     */
+    public void setImageHeight(Context context, ImageView image, int position) {
+
+
+        switch (spanCount) {
+            case 1:
+                if (H <= 0) {
+                    H = getScreenDisplayMetrics(context).widthPixels / spanCount;
+                    H = H / 2;
+                }
+
+                break;
+            case 2:
+                H = getScreenDisplayMetrics(context).widthPixels / spanCount;
+                if (position == 0) {
+                    H = (int) (H / 1.5f);
+
+                }
+
+                break;
+
+            default:
+                if (H <= 0) {
+                    H = getScreenDisplayMetrics(context).widthPixels / spanCount;
+
+                }
+                break;
+
+        }
+
+        if (H <= 0) {
+            H = getScreenDisplayMetrics(context).widthPixels / spanCount;
+
+
+        }
+
+        ViewGroup.LayoutParams params = image.getLayoutParams();
+        params.height = H;
+        image.setLayoutParams(params);
+    }
+
+
+    /**
+     * 设置recyclerView的LayoutManager
+     *
+     * @param context
+     * @param recyclerView
+     */
+    public void setRecyclerViewLayoutManager(Context context, RecyclerView recyclerView) {
+        RecyclerView.LayoutManager manager = null;
+
+        if (spanCount == 2) {
+
+            manager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
+        } else {
+            manager = new GridLayoutManager(context, spanCount);
+        }
+
+
+        recyclerView.setLayoutManager(manager);
+
     }
 
 

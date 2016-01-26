@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,7 +46,7 @@ public class CanPicturesActivity extends AppCompatActivity {
     private ImageAdapter adapter;
 
 
-    private int H;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,7 @@ public class CanPicturesActivity extends AppCompatActivity {
 
         context = this;
 
-        H = CanPhotoHelper.getInstance().getScreenDisplayMetrics(context).widthPixels / CanPhotoHelper.getInstance().getSpanCount();
+
 
         findViewById(R.id.main).setBackgroundColor(CanPhotoHelper.getInstance().getBackGroundColor());
         toolBar = (CanToolBar) findViewById(R.id.tool_bar);
@@ -73,7 +72,8 @@ public class CanPicturesActivity extends AppCompatActivity {
 
         adapter = new ImageAdapter(recyclerView);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(this, CanPhotoHelper.getInstance().getSpanCount(), GridLayoutManager.VERTICAL, false));
+        CanPhotoHelper.getInstance().setRecyclerViewLayoutManager(context,recyclerView);
+
         recyclerView.setAdapter(adapter);
         initListener();
 
@@ -192,9 +192,8 @@ public class CanPicturesActivity extends AppCompatActivity {
             final ImageView selectedView = helper.getView(R.id.isselected);
 
 
-            ViewGroup.LayoutParams params = image.getLayoutParams();
-            params.height = H;
-            image.setLayoutParams(params);
+
+            CanPhotoHelper.getInstance().setImageHeight(context, image,position);
 
             CanPhotoHelper.getInstance().setDraweeImage(image, "file://" + url, 0, 0);
 
